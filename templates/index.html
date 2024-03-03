@@ -10,14 +10,14 @@
 <body>
 
     {% set menssagem = get_flashed_messages()%}
-        {% if menssagem %}
+    {% if menssagem %}
 
-            <div class="flash_menssagem">
-                {{ menssagem[0] }}
+    <div class="flash_menssagem">
+        {{ menssagem[0] }}
 
-            </div>
+    </div>
 
-        {% endif %}
+    {% endif %}
 
     <section class="sec1">
         <span class="titulo">
@@ -25,15 +25,55 @@
         </span>
         <div class="adicionar">
             <h2>Adicionar tarefa</h2>
-            
+
             <form action="/adicionar_tarefa" method="post">
                 <div class="add"><input type="text" name="tarefa" class="tarefa" placeholder="digite aqui:" required>
-               <button type="submit" class="btn"><img src="/static/imagens/check4.png" alt="check" class="img_btn"></button></div>
-              
+                    <button type="submit" class="btn"><img src="/static/imagens/check4.png" alt="check"
+                            class="img_btn"></button>
+                </div>
+
             </form>
         </div>
 
-            <hr class="linha">
+        <hr class="linha">
+
+        <div class="concluir_excluir_div">
+            <h2>Tarefas</h2>
+            {% if tarefas_json %}
+                {% for tarefa in tarefas_json %}
+            <form action="/concluir_excluir" method="post">
+                <ul class="lista">
+
+                   
+                   
+                    <div class="tarefas_div">
+                        <li>
+                            <input type="hidden" name="id_ta" value="{{ tarefa['id'] }}">
+                            <input type="hidden" name="nome_ta" value="{{ tarefa['nome_tarefa'] }}">
+
+                            {{ tarefa['nome_tarefa']}} --------------------------------------
+                        </li>
+
+
+                        <button type="submit" class="btn" name="btn" value="concluido"><img
+                                src="/static/imagens/check4.png" alt="check" class="img_btn"></button>
+                        <button type="submit" class="btn" name="btn" value="excluir"><img src="/static/imagens/excluir.png"
+                                alt="excluir" class="img_btn_ex"></button>
+
+
+                    </div>
+                </form>
+
+                    {% endfor %}
+                    {% else %}
+                    <h1>Ainda não há tarefas adicionadas</h1>
+                    {% endif %}
+
+                </ul>
+
+            
+        </div>
+
     </section>
 
 

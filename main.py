@@ -6,6 +6,7 @@ app = Flask(__name__)
 app.secret_key = 'joao07'
 app.config['DEBUG'] = True
 
+concluidos = []
 
 class Tarefas:
     def __init__(self,incremento,tarefa):
@@ -21,15 +22,20 @@ def obterId():
     if os.path.isfile('tarefas.json') and os.path.getsize('tarefas.json') > 0:
         with open('tarefas.json') as tf:
             tarefas_py = json.load(tf)
-            return tarefas_py[-1]['id']
+            if tarefas_py:
+                return tarefas_py[-1]['id']
     return 0
+
+    
 
 
 
 @app.route('/')
 def home():
-    with open('tarefas.json') as tf:
-        tarefas_json = json.load(tf)
+    tarefas_json = []  
+    if os.path.isfile('tarefas.json') and os.path.getsize('tarefas.json') > 0:
+        with open('tarefas.json') as tf:
+            tarefas_json = json.load(tf)
     return render_template('index.html',tarefas_json=tarefas_json)
 
 
@@ -63,6 +69,42 @@ def adicionar_tarefa():
 
 
 
+@app.route('/concluir_excluir',methods=['POST'])
+def concluir_excluir():
+    
+   
+    
+    tarefa_id = int(request.form.get('id_ta'))
+    tarefa_nome = request.form.get('nome_ta')
+    btn = request.form.get('btn')
+    
+  
+
+
+    
+
+    
+    if btn == 'excluir':
+        with open('tarefas.json') as tf:
+                tarefas_py = json.load(tf)
+                # Criar uma cópia da lista
+                tarefas_copia = tarefas_py[:]
+                for tarefa in tarefas_copia:
+                    if tarefa['id'] == tarefa_id:
+                        tarefas_py.remove(tarefa)
+                        flash(f'"{tarefa_nome}" excluido(a) com sucesso')
+                        break
+    else:
+        with open('tarefas.json') as tf:
+            tarefas_py = json.load('tarefas.json')
+            tarefas_copia = tarefas_py[:]
+            for tarefa in tarefas_copia:
+
+
+        
+    with open('tarefas.json', 'w') as tf:
+            json.dump(tarefas_py, tf, indent=2)
+    return redirect('/')
 
 
 

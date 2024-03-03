@@ -56,24 +56,31 @@ body{
    display: flex;
    justify-content: center;
    align-items: center;
-   
+}
+
+.tarefas_div{
+    padding-top: 10px;
+    display: flex;
+    justify-content:center;
+    align-items: center;
 }
 
 .img_btn{
     width: 100%;
     height: 35px;
 }
+.img_btn_ex{
+    width: 110%;
+    height: 39px;
+    margin-bottom: 2px;
+}
 .btn{
     border: none;
     width: 5%;
     height: 35px;
-    padding-bottom: 10px;
-    display: block;
-    display: flex;
-    justify-content: center;
     cursor: pointer;
-    
 }
+
 
 .flash_menssagem{
     width: auto;
@@ -87,4 +94,25 @@ body{
 .linha{
     border: 2px solid black;
     width: 100%;
+}
+
+ul{
+    list-style: disc;
+}
+
+.concluir_excluir_div{
+    border: 2px solid darkblue;
+    width: 68%;
+    gap:20px;
+    padding-top: 10px;
+    text-align: center;
+    
+}
+
+.btns{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 20px;
 }

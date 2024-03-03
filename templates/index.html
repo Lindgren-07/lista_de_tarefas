@@ -1,14 +1,44 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>lista_de_tarefas</title>
-        <meta charset="utf-8">
-        <link rel="stylesheet" href="/static/style.css">
-    </head>
-    <body>
 
-       
+<head>
+    <title>lista_de_tarefas</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+    {% set menssagem = get_flashed_messages()%}
+        {% if menssagem %}
+
+            <div class="flash_menssagem">
+                {{ menssagem[0] }}
+
+            </div>
+
+        {% endif %}
+
+    <section class="sec1">
+        <span class="titulo">
+            <h1>Sua lista</h1>
+        </span>
+        <div class="adicionar">
+            <h2>Adicionar tarefa</h2>
+            
+            <form action="/adicionar_tarefa" method="post">
+                <div class="add"><input type="text" name="tarefa" class="tarefa" placeholder="digite aqui:" required>
+               <button type="submit" class="btn"><img src="/static/imagens/check4.png" alt="check" class="img_btn"></button></div>
+              
+            </form>
+        </div>
+
+            <hr class="linha">
+    </section>
 
 
-    </body>
+
+
+</body>
+
 </html>

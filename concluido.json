@@ -1,6 +1,10 @@
 [
   {
-    "id": 3,
-    "nome_tarefa": "treinar"
+    "id": 1,
+    "nome_tarefa": "comprar"
+  },
+  {
+    "id": 2,
+    "nome_tarefa": "nadar"
   }
 ]

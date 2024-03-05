@@ -32,7 +32,7 @@ def obterIdConcluido():
             concluido_py = json.load(c)
             return concluido_py[-1]['id'] + 1
     
-    return obterId() 
+    return 1
 
     
 
@@ -87,9 +87,8 @@ def concluir_excluir():
    
     
     tarefa_id = int(request.form.get('id_ta'))
-    novo_id = obterIdConcluido()
+    novo_id = obterIdConcluido() 
     tarefa_nome = request.form.get('nome_ta')
-    btn_concluir = request.form.get(f'btn_concluir_{tarefa_id}')
     btn_excluir = request.form.get(f'btn_excluir_{tarefa_id}')
     
     
@@ -113,7 +112,7 @@ def concluir_excluir():
                         break
     else:
         tarefa_dict = {
-            'id':tarefa_id,
+            'id':novo_id,
             'nome_tarefa':tarefa_nome
         }
         concluido = []

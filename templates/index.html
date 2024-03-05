@@ -40,38 +40,67 @@
         <div class="concluir_excluir_div">
             <h2>Tarefas</h2>
             {% if tarefas_json %}
-                {% for tarefa in tarefas_json %}
             <form action="/concluir_excluir" method="post">
                 <ul class="lista">
+                    {% for tarefa in tarefas_json %}
 
-                   
-                   
+
+
+
+
                     <div class="tarefas_div">
                         <li>
                             <input type="hidden" name="id_ta" value="{{ tarefa['id'] }}">
                             <input type="hidden" name="nome_ta" value="{{ tarefa['nome_tarefa'] }}">
 
-                            {{ tarefa['nome_tarefa']}} --------------------------------------
+                            <h3>{{ tarefa['nome_tarefa']}} -----------------------------------</h3>
                         </li>
 
-
-                        <button type="submit" class="btn" name="btn" value="concluido"><img
-                                src="/static/imagens/check4.png" alt="check" class="img_btn"></button>
-                        <button type="submit" class="btn" name="btn" value="excluir"><img src="/static/imagens/excluir.png"
-                                alt="excluir" class="img_btn_ex"></button>
-
+                        <div class="btns">
+                            <button type="submit" class="btn__" name="btn" value="concluido"><img
+                                    src="/static/imagens/check4.png" alt="check" class="img_btn"></button>
+                            <button type="submit" class="btn__" name="btn" value="excluir"><img
+                                    src="/static/imagens/excluir.png" alt="excluir" class="img_btn_ex"></button>
+                        </div>
 
                     </div>
-                </form>
+
 
                     {% endfor %}
-                    {% else %}
-                    <h1>Ainda não há tarefas adicionadas</h1>
-                    {% endif %}
-
                 </ul>
+            </form>
+            {% else %}
+            <h1>Ainda não há tarefas adicionadas</h1>
+            {% endif %}
 
-            
+            <img src="/static/imagens/pergaminho.png" alt="pergaminho" class="img_pergaminho">
+
+
+        </div>
+
+        <hr class="linha">
+        <div class="concluido">
+            <h1>Concluido</h1>
+            {% if concluido_json %}
+            <form action="/concluido" method="post">
+                <ul class="concluido_class">
+                    {% for tarefa in concluido_json %}
+
+
+                    <li>{{ tarefa['nome_tarefa'] }}</li>
+
+
+                    
+                    {% endfor %}
+                    <button class="limpar">Limpar</button>
+                </ul>
+            </form>
+            {% else %}
+            <h1>Ainda não há tarefas concluidas</h1>
+            {% endif %}
+
+
+
         </div>
 
     </section>

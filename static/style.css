@@ -22,9 +22,9 @@ body{
     align-items: center;
     border-radius: 18px;
     background-color: #efefef;
-    width: 65%;
+    width: 70%;
     gap: 10px;
-    height: 700px;
+    height: auto;
     
 }
 
@@ -72,7 +72,7 @@ body{
 .img_btn_ex{
     width: 110%;
     height: 39px;
-    margin-bottom: 2px;
+    
 }
 .btn{
     border: none;
@@ -97,22 +97,62 @@ body{
 }
 
 ul{
-    list-style: disc;
+    list-style: upper-roman;
+    gap: 15px;
+    padding-bottom: 10px;
 }
-
+li {
+    padding-bottom: 18px; 
+}
 .concluir_excluir_div{
     border: 2px solid darkblue;
     width: 68%;
     gap:20px;
-    padding-top: 10px;
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   
     
+}
+
+
+
+.concluido{
+    border: 2px solid darkblue;
+    width: 68%;
+    gap:20px;
+    padding-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+   
+   
+    
+}
+
+.concluido_class{
+    list-style: upper-roman;
 }
 
 .btns{
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 50%;
-    height: 20px;
+    width: 20%;
+    height: 30px;
+    
+}
+
+.btn__{
+    cursor: pointer;
+    width: 35%;
+    height: 50px;
+    border: none;
+
+}
+
+.img_pergaminho{
+    width: 20%;
+    height: 100px;
 }

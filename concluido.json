@@ -1,26 +1,6 @@
 [
   {
-    "id": 1,
-    "nome_tarefa": "comprar"
-  },
-  {
-    "id": 2,
-    "nome_tarefa": "treinar"
-  },
-  {
     "id": 3,
-    "nome_tarefa": "sss"
-  },
-  {
-    "id": 4,
-    "nome_tarefa": "nadar"
-  },
-  {
-    "id": 5,
     "nome_tarefa": "treinar"
-  },
-  {
-    "id": 6,
-    "nome_tarefa": "comprar"
   }
 ]

@@ -37,46 +37,39 @@
 
         <hr class="linha">
 
-        <div class="concluir_excluir_div">
-            <h2>Tarefas</h2>
-            {% if tarefas_json %}
-            <form action="/concluir_excluir" method="post">
+       
+            <div class="concluir_excluir_div">
+                <h2>Tarefas</h2>
+                {% if tarefas_json %}
                 <ul class="lista">
-                    {% for tarefa in tarefas_json %}
-
-
-
-
-
-                    <div class="tarefas_div">
+                {% for tarefa in tarefas_json %}
+                <div class="tarefas_div">
+                    <form action="/concluir_excluir" method="post">
+                        <input type="hidden" name="id_ta" value="{{ tarefa['id'] }}">
+                        <input type="hidden" name="nome_ta" value="{{ tarefa['nome_tarefa'] }}">
                         <li>
-                            <input type="hidden" name="id_ta" value="{{ tarefa['id'] }}">
-                            <input type="hidden" name="nome_ta" value="{{ tarefa['nome_tarefa'] }}">
-
-                            <h3>{{ tarefa['nome_tarefa']}} -----------------------------------</h3>
+                            <h3>{{ tarefa['nome_tarefa'] }} -----------------------------------------------</h3>
                         </li>
-
                         <div class="btns">
-                            <button type="submit" class="btn__" name="btn" value="concluido"><img
-                                    src="/static/imagens/check4.png" alt="check" class="img_btn"></button>
-                            <button type="submit" class="btn__" name="btn" value="excluir"><img
-                                    src="/static/imagens/excluir.png" alt="excluir" class="img_btn_ex"></button>
+                            <button type="submit" class="btn__" name="btn_concluir_{{ tarefa['id'] }}" value="concluido">
+                                <img src="/static/imagens/check4.png" alt="check" class="img_btn">
+                            </button>
+                            <button type="submit" class="btn__" name="btn_excluir_{{ tarefa['id'] }}" value="excluir">
+                                <img src="/static/imagens/excluir.png" alt="excluir" class="img_btn_ex">
+                            </button>
                         </div>
-
-                    </div>
-
-
-                    {% endfor %}
+                    </form>
+                </div>
+                {% endfor %}
+                {% else %}
                 </ul>
-            </form>
-            {% else %}
-            <h1>Ainda não há tarefas adicionadas</h1>
-            {% endif %}
-
+                <h1>Ainda não há tarefas adicionadas</h1>
+                {% endif %}
+                
             <img src="/static/imagens/pergaminho.png" alt="pergaminho" class="img_pergaminho">
 
-
-        </div>
+            </div>
+    
 
         <hr class="linha">
         <div class="concluido">
@@ -90,7 +83,7 @@
                     <li>{{ tarefa['nome_tarefa'] }}</li>
 
 
-                    
+
                     {% endfor %}
                     <button class="limpar">Limpar</button>
                 </ul>

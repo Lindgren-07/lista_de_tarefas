@@ -89,7 +89,8 @@ def concluir_excluir():
     tarefa_id = int(request.form.get('id_ta'))
     novo_id = obterIdConcluido()
     tarefa_nome = request.form.get('nome_ta')
-    btn = request.form.get('btn')
+    btn_concluir = request.form.get(f'btn_concluir_{tarefa_id}')
+    btn_excluir = request.form.get(f'btn_excluir_{tarefa_id}')
     
     
   
@@ -98,7 +99,7 @@ def concluir_excluir():
     
 
     
-    if btn == 'excluir':
+    if btn_excluir:
         
         with open('tarefas.json') as tf:
                 tarefas_py = json.load(tf)
@@ -112,7 +113,7 @@ def concluir_excluir():
                         break
     else:
         tarefa_dict = {
-            'id':novo_id,
+            'id':tarefa_id,
             'nome_tarefa':tarefa_nome
         }
         concluido = []

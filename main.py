@@ -146,6 +146,12 @@ def concluir_excluir():
 
 
 
+@app.route('/concluido', methods=['POST'])
+def concluido():
+    with open('concluido.json','w') as c:
+        c.write = " "
+    flash('Lista limpa com sucesso')
+    return redirect('/')
 
 
 

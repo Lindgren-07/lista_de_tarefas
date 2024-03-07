@@ -156,3 +156,19 @@ li {
     width: 20%;
     height: 100px;
 }
+
+.limpar{
+    height: 30px;
+    width: 100%;
+    background-color: darkblue;
+    color: #efefef;
+    border-radius: 13px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.limpar:hover{
+    background-color: #efefef;
+    color: darkblue;
+}
+

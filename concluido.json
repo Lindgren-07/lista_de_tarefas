@@ -1,10 +1,6 @@
 [
   {
     "id": 1,
-    "nome_tarefa": "nadar"
-  },
-  {
-    "id": 2,
     "nome_tarefa": "comprar"
   }
 ]

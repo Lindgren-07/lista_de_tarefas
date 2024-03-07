@@ -27,12 +27,18 @@ def obterId():
     return 0
 
 def obterIdConcluido():
-    if os.path.isfile('concluido.json') and os.path.getsize('concluido.json'):
+    if os.path.isfile('concluido.json') and os.path.getsize('concluido.json') > 0:
         with open('concluido.json') as c:
-            concluido_py = json.load(c)
-            return concluido_py[-1]['id'] + 1
-    
-    return 1
+            try:
+                concluido_py = json.load(c)
+                return concluido_py[-1]['id'] + 1
+            except json.decoder.JSONDecodeError:
+                # Lidar com o erro se o arquivo 'concluido.json' estiver vazio
+                return 1
+    else:
+        # Lidar com o caso em que 'concluido.json' não existe ou está vazio
+        return 1
+
 
     
 
@@ -47,8 +53,13 @@ def home():
             tarefas_json = json.load(tf)
     if os.path.isfile('concluido.json') and os.path.getsize('concluido.json') > 0:
         with open('concluido.json') as c:
-            concluido_json = json.load(c)
-    return render_template('index.html',tarefas_json=tarefas_json,concluido_json=concluido_json)
+            try:
+                concluido_json = json.load(c)
+            except json.decoder.JSONDecodeError:
+                # Lidar com o erro se o arquivo 'concluido.json' estiver vazio
+                concluido_json = []
+    return render_template('index.html', tarefas_json=tarefas_json, concluido_json=concluido_json)
+
 
 
 @app.route('/adicionar_tarefa',methods=['POST'])
@@ -81,66 +92,57 @@ def adicionar_tarefa():
 
 
 
-@app.route('/concluir_excluir',methods=['POST'])
+@app.route('/concluir_excluir', methods=['POST'])
 def concluir_excluir():
-    
-   
-    
     tarefa_id = int(request.form.get('id_ta'))
-    novo_id = obterIdConcluido() 
+    novo_id = obterIdConcluido()
     tarefa_nome = request.form.get('nome_ta')
     btn_excluir = request.form.get(f'btn_excluir_{tarefa_id}')
-    
-    
-  
 
-
-    
-
-    
     if btn_excluir:
-        
         with open('tarefas.json') as tf:
-                tarefas_py = json.load(tf)
-               
-                for tarefa in tarefas_py:
-                    if tarefa['id'] == tarefa_id:
-                        print(tarefa['id'])
-                        print(tarefa)
-                        tarefas_py.remove(tarefa)
-                        flash(f'"{tarefa_nome}" excluido(a) com sucesso')
-                        break
+            tarefas_py = json.load(tf)
+
+        for tarefa in tarefas_py:
+            if tarefa['id'] == tarefa_id:
+                print(tarefa['id'])
+                print(tarefa)
+                tarefas_py.remove(tarefa)
+                flash(f'"{tarefa_nome}" excluido(a) com sucesso')
+                break
     else:
         tarefa_dict = {
-            'id':novo_id,
-            'nome_tarefa':tarefa_nome
+            'id': novo_id,
+            'nome_tarefa': tarefa_nome
         }
         concluido = []
-        with open('tarefas.json') as tf:
 
+        with open('tarefas.json') as tf:
             tarefas_py = json.load(tf)
             for tarefa in tarefas_py:
                 if tarefa['id'] == tarefa_id:
                     tarefas_py.remove(tarefa)
-        
+
         if os.path.isfile('concluido.json') and os.path.getsize('concluido.json') > 0:
-            with open('concluido.json') as c:
-                concluido_py = json.load(c)
-                concluido.extend(concluido_py)
+            try:
+                with open('concluido.json') as c:
+                    concluido_py = json.load(c)
+            except json.decoder.JSONDecodeError:
+                concluido_py = []
+
+            concluido.extend(concluido_py)
 
         concluido.append(tarefa_dict)
-        
-        with open('concluido.json','w') as c:
-            json.dump(concluido,c,indent=2)
+
+        with open('concluido.json', 'w') as c:
+            json.dump(concluido, c, indent=2)
+
         flash(f'"{tarefa_nome}" concluido(a) com sucesso ')
 
-
-        
     with open('tarefas.json', 'w') as tf:
         json.dump(tarefas_py, tf, indent=2)
-        return redirect('/')
 
-
+    return redirect('/')
 
 
 
